@@ -1,0 +1,17 @@
+.comment-list{
+    overflow: hidden;
+    padding: 10px;
+}
+
+.comment-user{
+    float: left;
+}
+
+.comment-list p{
+    float: left;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}

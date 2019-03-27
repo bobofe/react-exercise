@@ -1,0 +1,45 @@
+.comment-input{
+    border: 1px solid #f1f1f1;
+    padding: 20px;
+}
+
+.comment-field{
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+.comment-field-name{
+    float: left;
+    width: 110px;
+    font-size: 16px;
+    line-height: 34px;
+}
+.comment-field-input{
+    float: left;
+}
+
+.comment-field-input input,.comment-field-input textarea{
+    width: 340px;
+    border: 1px solid #f1f1f1;
+}
+
+.comment-field-input input{
+    height: 30px;
+}
+
+.comment-field-input textarea{
+    height: 100px;
+}
+
+
+.comment-field-button{
+    overflow: hidden;
+}
+.comment-field-button button{
+    border: none;
+    width: 100px;
+    height: 30px;
+    background: deepskyblue;
+    float: right;
+}
+
