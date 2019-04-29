@@ -9,13 +9,12 @@ class CommentList extends Component{
             <div>
                 {
                     comments.map( (comment,index)=> {
+                        // key值要加在循环的最外层
                         return(
-                            <div key={index}>
-                                <Comment name={comment.name}
-                                         comment={comment.content}
-                                />
-                            </div>
-
+                            <Comment name={comment.name}
+                                     comment={comment.content}
+                                     key={index}
+                            />
                         )
                     })
                 }
