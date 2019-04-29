@@ -6,13 +6,26 @@ class CommentApp extends Component{
     constructor(){
         super();
         this.state={
-            comments:[
-                {name:'大大da',content:'你好dee'},
-                {name:'小小fff',content:'你好fce'},
-                {name:'期间就非IE',content:'的点点滴滴'},
-            ]
+            comments:[]
         };
         this.commentUpdate = this.commentUpdate.bind(this)
+    }
+
+    componentWillMount(){
+        this._loadComments()
+    }
+
+    _loadComments(){
+        var comments = localStorage.getItem('comments');
+        this.setState(function () {
+            return{
+                comments: JSON.parse(comments)
+            }
+        })
+    }
+
+    _updateComments(comments){
+        localStorage.setItem('comments',JSON.stringify(comments))
     }
 
     commentUpdate(comment){
@@ -20,32 +33,34 @@ class CommentApp extends Component{
         // 可以赋值给一个新变量，再将新变量通过setState给到this.state中的属性，
         // 从而实现数据变化，并重新渲染
         // 方法一：
-        // const comments = this.state.comments;
-        //
-        // comments.push(comment);
-        // this.setState((prevState)=>{
-        //     return{
-        //         comments:comments
-        //     }
-        // });
+        if(!comment) return;
+        if(!comment.name) alert('请输入用户名');
+        if(!comment.content) alert('请输入评论内容');
 
+        const comments = this.state.comments;
+
+        comments.push(comment);
+        this.setState(()=>{
+            return{
+                comments:comments
+            }
+        });
+
+        this._updateComments(comments)
         // 方法二：剩余参数
         // this.setState(()=>({comments: [...this.state.comments,comment]}));
 
         // 方法三：setState函数参数
-        this.setState((prevState,props)=>{
-            // 固定参数，第一个是this.state的前一个状态；第二个参数为属性对象props
-            console.log(prevState)
-            console.log(comment)
-            console.log(props);   //{}
-
-            return{
-                comments:[...prevState.comments,comment]
-            }
-        })
-
-
-
+        // this.setState((prevState,props)=>{
+        //     // 固定参数，第一个是this.state的前一个状态；第二个参数为属性对象props
+        //     console.log(prevState)
+        //     console.log(comment)
+        //     console.log(props);   //{}
+        //
+        //     return{
+        //         comments:[...prevState.comments,comment]
+        //     }
+        // })
     }
 
     render(){

@@ -1,8 +1,14 @@
 import React,{ Component } from 'react';
 import './Comment.css'
+import PropTypes from 'prop-types'
 
 
 class Comment extends Component{
+
+
+    static propTypes = {
+        comment: PropTypes.string.isRequired
+    }
 
     render(){
         const {name,comment}=this.props;

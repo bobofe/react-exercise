@@ -11,6 +11,35 @@ class CommentInput extends Component{
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleCommentChange = this.handleCommentChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUsernameBlur = this.handleUsernameBlur.bind(this);
+    }
+
+    componentWillMount(){
+        // 在render之前执行
+        this._loadUsername()
+    }
+
+    componentDidMount(){
+        //在render之后执行
+        this.textarea.focus();
+
+    }
+
+    // 持久化用户名：将用户名保存到localStorage
+    _saveUsername(username){
+        localStorage.setItem('username',username)
+    }
+
+    // 页面刷新时加载用户名
+    _loadUsername(){
+        var username = localStorage.getItem('username');
+        if(username){
+            this.setState(()=>{
+                return{
+                    name:username
+                }
+            })
+        }
     }
 
     handleUsernameChange(e){
@@ -47,6 +76,15 @@ class CommentInput extends Component{
         })
     }
 
+    handleUsernameBlur(event){
+        // 输入框失去焦点时，将值保存都localStorage中
+        this._saveUsername(event.target.value)
+    }
+
+    handleCommentBlur(event){
+        this._saveComment(event.target.value)
+    }
+
     render(){
         return(
             <div className="comment-input">
@@ -56,6 +94,7 @@ class CommentInput extends Component{
                         <input type="text"
                                value={this.state.name}
                                onChange={this.handleUsernameChange}
+                               onBlur={this.handleUsernameBlur}
                         />
                     </div>
                 </div>
@@ -64,6 +103,7 @@ class CommentInput extends Component{
                     <div className="comment-field-input">
                         <textarea value={this.state.content}
                                   onChange={this.handleCommentChange}
+                                  ref={(textarea)=>this.textarea=textarea}
                         />
                     </div>
                 </div>
