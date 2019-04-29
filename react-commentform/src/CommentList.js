@@ -3,9 +3,16 @@ import Comment from './Comment'
 
 class CommentList extends Component{
 
+    handleDelete(index){
+        console.log(this.props);
+        if(this.props.onDeleteComment){
+            this.props.onDeleteComment(index)
+        }
+    }
+
     render(){
         const {comments}=this.props;
-        console.log(comments);
+        // console.log(comments);
         return(
             <div>
                 {
@@ -14,6 +21,8 @@ class CommentList extends Component{
                         return(
                             <Comment comment={comment}
                                      key={index}
+                                     index={index}
+                                     onDeleteComment={this.handleDelete.bind(this)}
                             />
                         )
                     })

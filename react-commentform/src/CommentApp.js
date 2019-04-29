@@ -8,7 +8,8 @@ class CommentApp extends Component{
         this.state={
             comments:[],
         };
-        this.commentUpdate = this.commentUpdate.bind(this)
+        this.commentUpdate = this.commentUpdate.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentWillMount(){
@@ -71,12 +72,24 @@ class CommentApp extends Component{
         // })
     }
 
+    handleDelete(index){
+        const comments = this.state.comments;
+        comments.splice(index,1);
+        this.setState(function () {
+            return{
+                comments:comments
+            }
+        });
+        this._updateComments(comments)
+    }
+
     render(){
         return(
             <div className="wrapper">
                 {/*作为组件调用时可以有属性和方法，使用上和标签相同，可通过给组件加属性和方法实现向组件间的数据传递*/}
                 <CommentInput updateComment={this.commentUpdate}/>
-                <CommentList comments={this.state.comments} />
+                <CommentList comments={this.state.comments}
+                             onDeleteComment={this.handleDelete}/>
             </div>
         )
     }
