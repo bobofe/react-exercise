@@ -66,7 +66,12 @@ class CommentInput extends Component{
 
     handleSubmit(){
         // 向父组件传递数据，在子组件调用父组件的方法，将要传递的数据作为方法的参数
-        this.props.updateComment(this.state);
+        this.props.updateComment(
+            {
+                name: this.state.name,
+                content: this.state.content,
+                createdTime: Date.now()
+            });
 
         // 提交数据完成后，清空内容区，保留用户名
         this.setState(()=>{

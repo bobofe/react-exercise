@@ -5,14 +5,14 @@ class CommentList extends Component{
 
     render(){
         const {comments}=this.props;
+        console.log(comments);
         return(
             <div>
                 {
                     comments.map( (comment,index)=> {
                         // key值要加在循环的最外层
                         return(
-                            <Comment name={comment.name}
-                                     comment={comment.content}
+                            <Comment comment={comment}
                                      key={index}
                             />
                         )

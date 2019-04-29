@@ -6,7 +6,7 @@ class CommentApp extends Component{
     constructor(){
         super();
         this.state={
-            comments:[]
+            comments:[],
         };
         this.commentUpdate = this.commentUpdate.bind(this)
     }
@@ -17,11 +17,19 @@ class CommentApp extends Component{
 
     _loadComments(){
         var comments = localStorage.getItem('comments');
-        this.setState(function () {
-            return{
-                comments: JSON.parse(comments)
-            }
-        })
+        if(comments){
+            this.setState(function () {
+                return{
+                    comments: JSON.parse(comments)
+                }
+            })
+        }else{
+            this.setState(function () {
+                return{
+                    comments:this.state.comments
+                }
+            })
+        }
     }
 
     _updateComments(comments){
@@ -68,7 +76,7 @@ class CommentApp extends Component{
             <div className="wrapper">
                 {/*作为组件调用时可以有属性和方法，使用上和标签相同，可通过给组件加属性和方法实现向组件间的数据传递*/}
                 <CommentInput updateComment={this.commentUpdate}/>
-                <CommentList comments={this.state.comments}/>
+                <CommentList comments={this.state.comments} />
             </div>
         )
     }
